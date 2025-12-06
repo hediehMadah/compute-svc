@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: compute-svc
 spec:
+  #####Rolling Update
   strategy:
     type: RollingUpdate
     rollingUpdate:

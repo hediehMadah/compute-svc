@@ -3,7 +3,8 @@ kind: Deployment
 metadata:
   name: compute-svc
 spec:
-  replicas: 2
+  #replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: compute-svc
@@ -14,7 +15,8 @@ spec:
     spec:
       containers:
       - name: compute-svc
-        image: <your_docker_image>
+        # I pushed compute-svc image in my dockerhub 
+        image: hm7206/tisa:compute-svc
         ports:
         - containerPort: 8080
         env:

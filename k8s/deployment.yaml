@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: compute-svc
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: compute-svc
+  template:
+    metadata:
+      labels:
+        app: compute-svc
+    spec:
+      containers:
+      - name: compute-svc
+        image: <your_docker_image>
+        ports:
+        - containerPort: 8080
+        env:
+        - name: APP_VERSION
+          value: "1.0"
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 10
